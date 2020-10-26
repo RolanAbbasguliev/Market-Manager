@@ -1,6 +1,8 @@
 #include "menu.h"
 #include "algorithm"
 #include "unistd.h"
+#include <vector>
+
 
 
 
@@ -103,7 +105,6 @@ int Menu::start()
 
         system("clear");
         cout << "============== MARKET LIST ==============\n";
-
         for (int i = 0; i < stock.marketList.size(); i++)
         {
           cout << i + 1 << "] "<< stock.marketList.find(i)->second.name;
@@ -163,6 +164,8 @@ int Menu::start()
           int value;
           cin >> value;
           stock.productList.find(product_id)->second.cost = value;
+          stock.marketList.find(market_id)->second.AddProduct(stock.productList.find(product_id)->second);
+          break;
         }
         else if (choose != "n")
         {
@@ -471,6 +474,124 @@ int Menu::start()
         cout << "press any key to exit...\n";
         cin.ignore();
         cin.get();
+        break;
+      }
+      case 7: //Search cheapest market
+      {
+        int flag = 0;
+
+        system("clear");
+        cout << "============== PRODUCT LIST ==============\n";
+        for (int i = 0; i < stock.productList.size(); i++)
+        {
+          cout << i + 1 << "] "<< stock.productList.find(i)->second.name;
+          cout << ", " << stock.productList.find(i)->second.cost << "$\n";
+        }
+        if (stock.productList.empty())
+        {
+          system("clear");
+          cout << "============== PRODUCT LIST ==============\n";
+          cout << "Empty :(\n";
+          cout << "press any key to exit...\n";
+          cin.ignore();
+          cin.get();
+          break;
+        }
+        assert(!stock.productList.empty() && "stock.productList is empty");
+
+        int product_count = 0;
+        cout << "Enter [product] count: ";
+        cin >> product_count;
+        if (product_count <= 0 || product_count > stock.productList.size())
+        {
+          cout << "error input\n";
+          cout << "press any key to exit...\n";
+          cin.ignore();
+          cin.get();
+          break;
+        }
+        map <int, int> selec_product;  // <id, amout> of selected product
+        for (int i = 0; i < product_count; i++)
+        {
+          system("clear");
+          cout << "============== PRODUCT LIST ==============\n";
+          for (int i = 0; i < stock.productList.size(); i++)
+          {
+            cout << i + 1 << "] "<< stock.productList.find(i)->second.name;
+            cout << ", " << stock.productList.find(i)->second.cost << "$\n";
+          }
+          int product_id = -1;
+          int product_number = 0;
+          cout << "Enter [product] number: ";
+          cin >> product_number;
+          product_id = product_number - 1;
+          if (product_number <= 0 || product_number > stock.productList.size())
+          {
+            flag = 1;
+            cout << "error no such product at list\n";
+            cout << "press any key to exit...\n";
+            cin.ignore();
+            cin.get();
+            break;
+          }
+          assert(stock.productList.find(product_id)->second.GetID() == product_id && "wrong produсt_id");
+          int product_amount = 0;
+          cout << "Enter [product] amount: ";
+          cin >> product_amount;
+          if (product_amount <= 0)
+          {
+            flag = 1;
+            cout << "error [product] amount \n";
+            cout << "press any key to exit...\n";
+            cin.ignore();
+            cin.get();
+            break;
+          }
+          selec_product[product_id] = product_amount;
+        }
+        if (flag == 1)
+          break;
+        int index = 0;
+        int sum = 0;
+        int min = INT_MAX;
+        int id_product = 0;
+        int num_product = 0;
+        for (int i = 0; i < stock.marketList.size(); i++)
+        {
+          sum = 0;
+          for (auto elem : selec_product)
+          {
+            id_product = elem.first;
+            num_product = elem.second;
+            int cost_product = stock.marketList.find(i)->second.productInfo.find(id_product)->second.cost;
+            if (stock.marketList.find(i)->second.productInfo.find(id_product)->second.num >= num_product)
+              sum += cost_product * num_product;
+            else
+              break;
+          }
+          if (sum < min && sum != 0)
+          {
+            min = sum;
+            index = i;
+          }
+        }
+
+        if (min != INT_MAX && min != 0)
+        {
+          cout << "Market: " << stock.marketList.find(index)->second.name << " is the most profitable\n";
+          cout << "Total price: " << min << "\n";
+          cout << "press any key to exit...\n";
+          cin.ignore();
+          cin.get();
+        }
+        else
+        {
+          cout << "No result for your request\n";
+          cout << "press any key to exit...\n";
+          cin.ignore();
+          cin.get();
+        }
+
         break;
       }
       case 0:
