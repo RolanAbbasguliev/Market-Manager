@@ -12,6 +12,13 @@ public:
 public:
   void AddMarketToStock(Market _market);
   void AddProductToStock(Product _product);
+  int First();
+  int Second();
+  int Third();
+  int Quarter();
+  int Fifth();
+  int Six();
+  int Seven();
 };
 
 #endif //MARKET_MANAGER_STOCK_H

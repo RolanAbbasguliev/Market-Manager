@@ -20,6 +20,7 @@ void Market::AddProduct(Product _product)
 
 int Market::BuyProduct(Product _product, int quantity)
 {
+  int cost = 0;
   int _num = this->productInfo.find(_product.GetID())->second.num;
   if (quantity > _num)
   {
@@ -34,9 +35,10 @@ int Market::BuyProduct(Product _product, int quantity)
   {
     map <int, Product>::iterator it;
     it = this->productInfo.find(_product.GetID());
+    cost = this->productInfo.find(_product.GetID())->second.cost;
     this->productInfo.erase(it);
   }
-  return quantity * this->productInfo.find(_product.GetID())->second.cost;
+  return quantity * cost;
 }
 
 

@@ -22,5 +22,6 @@ public:
     cout << "============================================\n";
   }
   static int start();
+
 };
 #endif //MARKET_MANAGER_MENU_H
