@@ -23,37 +23,37 @@ int Menu::start()
     {
       case 1: // Create market
       {
-        stock.First();
+        stock.MCreateMarket();
         break;
       }
       case 2: // Create product
       {
-        stock.Second();
+        stock.MCreateProduct();
         break;
       }
       case 3: //Fill in market
       {
-        stock.Third();
+        stock.MFillIn();
         break;
       }
       case 4: //Search market with cheapest product
       {
-        stock.Quarter();
+        stock.MCheapProd();
         break;
       }
       case 5: // Money handle
       {
-        stock.Fifth();
+        stock.MMoneyHand();
         break;
       }
       case 6:  // Buy product
       {
-        stock.Six();
+        stock.MBatch();
         break;
       }
       case 7: //Search cheapest market
       {
-        stock.Seven();
+        stock.MCheapMark();
         break;
       }
       case 0:
@@ -64,6 +64,9 @@ int Menu::start()
       default:
       {
         cout << "No such key\n";
+        cout << "press any key to exit...\n";
+        cin.ignore();
+        cin.get();
         break;
       }
     }

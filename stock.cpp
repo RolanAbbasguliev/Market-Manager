@@ -10,7 +10,7 @@ void Stock::AddProductToStock(Product _product)
   this->productList.insert(make_pair(_product.GetID(), _product));
 }
 
-int Stock::First()
+int Stock::MCreateMarket()
 {
   system("clear");
   string name;
@@ -32,7 +32,7 @@ int Stock::First()
   return 0;
 }
 
-int Stock::Second()
+int Stock::MCreateProduct()
 {
   system("clear");
   string name = "";
@@ -63,7 +63,7 @@ int Stock::Second()
   return 0;
 }
 
-int Stock::Third()
+int Stock::MFillIn()
 {
   system("clear");
   int product_id = -1;
@@ -170,7 +170,7 @@ int Stock::Third()
   return 0;
 }
 
-int Stock::Quarter()
+int Stock::MCheapProd()
 {
   system("clear");
   int product_id = -1;
@@ -263,7 +263,7 @@ int Stock::Quarter()
   return 0;
 }
 
-int Stock::Fifth()
+int Stock::MMoneyHand()
 {
   int market_id = -1;
   system("clear");
@@ -368,7 +368,7 @@ int Stock::Fifth()
   return 0;
 }
 
-int Stock::Six()
+int Stock::MBatch()
 {
   system("clear");
   int product_id = -1;
@@ -480,7 +480,7 @@ int Stock::Six()
   return 1;
 }
 
-int Stock::Seven()
+int Stock::MCheapMark()
 {
   int flag = 0;
 
@@ -597,6 +597,7 @@ int Stock::Seven()
   }
   return 0;
 }
+
 
 
 
