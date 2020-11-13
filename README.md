@@ -1,7 +1,7 @@
 # Market-Manager
 Terminal Market Manager  
 Using c++ for modeling market manager application 
-For "MacOSx" users. If you want to run it on "windows" you shold probable change: system("clear"); -> system("cls"); 
+For "MacOSx" users. If you want to run it on "windows" you should probable change: system("clear"); -> system("cls"); 
 Run this application from terminal (NOT IDE). 
 
 ============== MARKET MANAGER ==============
